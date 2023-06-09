@@ -1,0 +1,10 @@
+install:
+- py -m venv env
+- env/Scripts/activate
+- pip install flask
+- pip install pillow
+- pip install numpy
+- pip install matplotlib
+- pip install -U Flask-WTF
+- pip install wtforms
+- py ./flaskapp/main.py
