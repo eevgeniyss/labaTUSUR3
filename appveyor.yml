@@ -1,4 +1,12 @@
-build: off
+version: 1.0.0-{build}
+image:
+  - Visual Studio 2019
+environment:
+  PYTHON: "C:\\Python38"
+  PATH: "%PYTHON%;%PATH%"
 
-test_script:
-  - python -c "assert 2+2 == 4"
+before_build:
+  - cmd: pip install -r requirements.txt
+
+build_script:
+  - cmd: python -m pytest test.py
