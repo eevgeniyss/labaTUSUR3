@@ -1,18 +1,24 @@
-name: 'Project'
-on: [push] # список событий на которые запускается действие
-jobs: # список работ которые будут делаться (каждая работа будет
-  Checks:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Begin
-        uses: actions/checkout@v3
-      - name: Echo hello
-        run: echo "hello world"
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.8"
-      - name: install
-        run: pip install -r requirements.txt
-      - name: Start tests
-        run:  python -m pytest test.py
+# appveyor.yml - https://www.appveyor.com/docs/lang/python
+---
+image:
+  - Visual Studio 2019
+
+environment:
+  matrix:
+  # - TOXENV: py27  # https://devguide.python.org/devcycle/#end-of-life-branches
+  # - TOXENV: py35
+  - TOXENV: py36    # https://devguide.python.org/#status-of-python-branches
+  - TOXENV: py37
+  - TOXENV: py38
+  - TOXENV: py39
+  - TOXENV: py310
+
+build: false
+
+install:
+  # - py --list
+  # - py -m pip install --upgrade pip
+  - py -m pip install tox
+
+test_script:
+  - py -m tox
