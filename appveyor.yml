@@ -1,2 +1,38 @@
-git checkout master && git remote update -p && git merge --ff-only 
-IF ERRORLEVEL 1 echo ERRORCODE_IS_%errorlevel%
+name: Test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run test
+      run: |
+        RESULT=$(node -e "console.log(2+2)")
+        if [ "$RESULT" == "5" ]; then
+          echo "::set-output name=result::pass"
+        else
+          echo "::set-output name=result::fail"
+        fi
+
+    - name: Check result
+      run: |
+        if [ "${{ steps.run_test.outputs.result }}" == "pass" ]; then
+          echo "Test passed!"
+        else
+          echo "Test failed."
+          exit 1
+        fi
