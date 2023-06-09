@@ -9,10 +9,7 @@ jobs: # список работ которые будут делаться (ка
         uses: actions/checkout@v3
       - name: Echo hello
         run: echo "hello world"
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.8"
+      - name:
       - name: install
         run: pip install -r requirements.txt
       - name: Start tests
