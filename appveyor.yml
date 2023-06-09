@@ -1,24 +1,20 @@
-# appveyor.yml - https://www.appveyor.com/docs/lang/python
----
+version: 1.0.{build}
 image:
   - Visual Studio 2019
-
 environment:
   matrix:
-  # - TOXENV: py27  # https://devguide.python.org/devcycle/#end-of-life-branches
-  # - TOXENV: py35
-  - TOXENV: py36    # https://devguide.python.org/#status-of-python-branches
-  - TOXENV: py37
-  - TOXENV: py38
-  - TOXENV: py39
-  - TOXENV: py310
-
-build: false
+    - PYTHON: "C:\\Python27-x64"
+    - PYTHON: "C:\\Python35-x64"
+    - PYTHON: "C:\\Python36-x64"
+    - PYTHON: "C:\\Python37-x64"
 
 install:
-  # - py --list
-  # - py -m pip install --upgrade pip
-  - py -m pip install tox
+  - 'SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%'
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+
+build_script:
+  - python setup.py build
 
 test_script:
-  - py -m tox
+  - python setup.py test
