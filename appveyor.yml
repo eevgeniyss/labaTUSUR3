@@ -7,4 +7,4 @@ install:
 - pip install matplotlib
 - pip install -U Flask-WTF
 - pip install wtforms
-- py ./flaskapp/main.py
+- py ./projectweb/app.py
