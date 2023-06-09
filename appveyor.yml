@@ -22,7 +22,7 @@ jobs:
     - name: Run test
       run: |
         RESULT=$(node -e "console.log(2+2)")
-        if [ "$RESULT" == "5" ]; then
+        if [ "$RESULT" == "4" ]; then
           echo "::set-output name=result::pass"
         else
           echo "::set-output name=result::fail"
