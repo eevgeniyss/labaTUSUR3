@@ -1,17 +1,2 @@
-name: CI
-on: [pull_request]
-jobs:
-  myjob:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Step 1
-        id: hello
-        run: <any>
-        continue-on-error: true
-      - name: Step 2
-        id: world
-        run: <any>
-        continue-on-error: true
-      - name: Check on failures
-        if: steps.hello.outcome != 'success' || steps.world.outcome != 'success'
-        run: exit 1
+git checkout master && git remote update -p && git merge --ff-only 
+IF ERRORLEVEL 1 echo ERRORCODE_IS_%errorlevel%
